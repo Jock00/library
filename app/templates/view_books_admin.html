@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}View Books{% endblock %}
+
+{% block content %}
+    {% if current_user.is_admin %}
+        <h1>Books List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Image</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.author }}</td>
+                    <td><img src="{{ book.image }}" alt="{{ book.name }}" style="width: 100px;"></td>
+                    <td>{{ book.description }}</td>
+                   <td>
+                        <!-- Edit button -->
+                        <a
+                                href="{{ url_for('auth.edit_book', book_id=book.id) }}">Edit</a>
+                        <!-- Delete button -->
+                        <form method="POST"
+                              action="{{ url_for('auth.delete_book', book_id=book.id) }}" style="display: inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You do not have permission to view this page.</p>
+    {% endif %}
+{% endblock %}

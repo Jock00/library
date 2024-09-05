@@ -1,0 +1,31 @@
+<!-- templates/index.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Welcome to Book Haven!</h1>
+    <p>Your one-stop destination for discovering and managing a world of books. Whether you're looking to add your favorite titles, browse through a curated collection, or connect with fellow book lovers, we have something for everyone.</p>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h2>Browse Books</h2>
+        <p>Explore our extensive collection of books. Find your next great read from various genres, authors, and titles. Dive into detailed descriptions and cover images to make informed choices.</p>
+        <a href="{{ url_for('main.view_books') }}" class="btn">View Books</a>
+    </div>
+
+    <div class="feature">
+        <h2>Add Your Favorites</h2>
+        <p>Have a book that’s not in our collection? Add it yourself! Share your favorite titles, authors, and cover images with the community. Your recommendations help others discover great reads.</p>
+        <a href="{{ url_for('auth.add_book') }}" class="btn">Add a Book</a>
+    </div>
+
+    <div class="feature">
+        <h2>Connect with Us</h2>
+        <p>Leave comments, reviews, and feedback. We love hearing from our users and value your input. Share your thoughts on books you've read or suggest improvements for our site.</p>
+        <a href="#" class="btn">Leave a Comment</a>
+    </div>
+</section>
+{% endblock %}

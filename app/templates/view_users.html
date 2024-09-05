@@ -1,0 +1,35 @@
+<!-- templates/view_users.html -->
+{% extends 'base.html' %}
+
+{% block title %}View Users{% endblock %}
+
+{% block content %}
+<section class="user-list">
+    <h2>Registered Users</h2>
+    {% if users %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    Delete/Edit
+                    <!-- Add any actions you want to perform for each user here -->
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No users found.</p>
+    {% endif %}
+</section>
+{% endblock %}

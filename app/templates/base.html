@@ -1,0 +1,83 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Books Site{% endblock %}</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+    {% block additional_css %}
+    <!-- Additional CSS can be included here -->
+    {% endblock %}
+</head>
+<body>
+
+<!-- Navbar -->
+<header>
+    <nav>
+        <div class="nav-left">
+            <ul>
+                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+
+
+                {% if current_user.is_authenticated %}
+                {% if current_user.is_admin %}
+                <li><a href="{{ url_for('main.view_books_admin') }}">View
+                    Books</a></li>
+                <li><a href="{{ url_for('main.view_users') }}">View Users</a>
+                </li>
+                {% else %}
+                <li><a href="{{ url_for('main.view_books') }}">View Books</a>
+                </li>
+                <li><a href="{{ url_for('auth.add_book') }}">Add Book</a></li>
+                {% endif %}
+                {% endif %}
+
+
+            </ul>
+        </div>
+        <div class="nav-right">
+            <ul>
+                {% if current_user.is_authenticated %}
+                    <li>
+                        <span>
+                            {{ current_user.email }}
+                            {% if current_user.is_admin %}
+                                (Admin)
+                            {% endif %}
+                        </span>
+                    </li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<!-- Flash Messages -->
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<div class="flash">
+    {% for category, message in messages %}
+    <div class="{{ category }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+
+<!-- Main Content -->
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 Bookstore. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

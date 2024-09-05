@@ -1,0 +1,287 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Navbar Styles */
+header {
+    background-color: #333;
+    padding: 1em 0;
+    color: white;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+}
+
+.nav-left ul, .nav-right ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-left ul li, .nav-right ul li {
+    margin: 0 1em;
+}
+
+.nav-left ul li a, .nav-right ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-left ul li a:hover, .nav-right ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Form Container Styles */
+.form-container {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 1em;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 0.7em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #004d99;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 2em;
+    background-color: #0066cc;
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3em;
+}
+
+.hero p {
+    font-size: 1.5em;
+}
+
+/* Featured Books Section */
+.featured-books {
+    padding: 2em;
+    text-align: center;
+}
+
+.featured-books h2 {
+    margin-bottom: 1em;
+}
+
+.book-grid {
+    display: flex;
+    justify-content: space-around;
+}
+
+.book-card {
+    background-color: white;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+}
+
+.book-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Add this to your styles.css */
+.flash {
+    padding: 1em;
+    margin: 1em 0;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.flash.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash.danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+
+/* User List Section */
+.user-list {
+    padding: 2em;
+}
+
+.user-list h2 {
+    margin-bottom: 1em;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 1em;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Add this to your styles.css */
+.form-container {
+    max-width: 600px;
+    margin: 2em auto;
+    padding: 1em;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 1em;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+
+.btn-primary {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    padding: 0.7em 1.5em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #004d99;
+}
+
+/* Home Page Styles */
+.hero {
+    background: #f9f9f9;
+    padding: 2em;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #555;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 2em;
+    background: #fff;
+}
+
+.feature {
+    flex: 1;
+    margin: 1em;
+    padding: 1.5em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.feature h2 {
+    font-size: 1.8em;
+    margin-bottom: 0.5em;
+}
+
+.feature p {
+    font-size: 1.1em;
+    color: #666;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.7em 1.5em;
+    margin-top: 1em;
+    background-color: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: #004d99;
+}

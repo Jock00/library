@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Book{% endblock %}
+
+{% block content %}
+    {% if current_user.is_admin %}
+        <h1>Edit Book</h1>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div>
+                {{ form.name.label }}<br>
+                {{ form.name() }}<br>
+                {% for error in form.name.errors %}
+                    <span class="error">{{ error }}</span><br>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.author.label }}<br>
+                {{ form.author() }}<br>
+                {% for error in form.author.errors %}
+                    <span class="error">{{ error }}</span><br>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.image.label }}<br>
+                {{ form.image() }}<br>
+                {% for error in form.image.errors %}
+                    <span class="error">{{ error }}</span><br>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.description.label }}<br>
+                {{ form.description() }}<br>
+                {% for error in form.description.errors %}
+                    <span class="error">{{ error }}</span><br>
+                {% endfor %}
+            </div>
+            <div>
+                {{ form.submit() }}
+            </div>
+        </form>
+    {% else %}
+        <p>You do not have permission to view this page.</p>
+    {% endif %}
+{% endblock %}

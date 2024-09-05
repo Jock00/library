@@ -1,0 +1,22 @@
+<!-- templates/view_books.html -->
+{% extends 'base.html' %}
+
+{% block title %}View Books{% endblock %}
+
+{% block content %}
+<section class="book-list">
+    <h2>Available Books</h2>
+    <div class="book-grid">
+        {% for book in books %}
+        <div class="book-card">
+            <img src="{{ book.image }}" alt="{{ book.title }} cover">
+            <h3>{{ book.title }}</h3>
+            <p>Author: {{ book.author }}</p>
+            <p>{{ book.description }}</p>
+        </div>
+        {% else %}
+        <p>No books available.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
