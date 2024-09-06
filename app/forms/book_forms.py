@@ -27,6 +27,11 @@ class LoginForm(FlaskForm):
 class EditBookForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     author = StringField('Author', validators=[DataRequired()])
+    user = StringField('User', validators=[DataRequired()])
     image = StringField('Image URL', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     submit = SubmitField('Update Book')
+
+class CommentForm(FlaskForm):
+    content = TextAreaField('Add your comment:', validators=[DataRequired()])
+    submit = SubmitField('Post Comment')

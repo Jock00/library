@@ -10,6 +10,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Author</th>
+                    <th>User</th>
                     <th>Image</th>
                     <th>Description</th>
                     <th>Actions</th>
@@ -20,6 +21,7 @@
                 <tr>
                     <td>{{ book.name }}</td>
                     <td>{{ book.author }}</td>
+                    <td>{{ book.user.username }}</td>
                     <td><img src="{{ book.image }}" alt="{{ book.name }}" style="width: 100px;"></td>
                     <td>{{ book.description }}</td>
                    <td>

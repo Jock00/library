@@ -1,17 +1,21 @@
 from app import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 
 class Books(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
-    author = db.Column(db.String(200), nullable=False)
-    image = db.Column(db.String(400), nullable=False)
-    description = db.Column(db.String(1000), nullable=False)
+    name = db.Column(db.String(150), nullable=False)
+    author = db.Column(db.String(150), nullable=False)
+    image = db.Column(db.String(300), nullable=True)
+    description = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('user.id'))  # User who posted the book
 
-    # Relationship to Reviews
+    comments = db.relationship('Comment', backref='book', lazy=True)
     reviews = db.relationship('Reviews', backref='book', lazy=True)
+    user = db.relationship('User', backref='books_added', lazy=True)
 
     def __repr__(self):
         return f"Books(id={self.id}, name='{self.name}', author='{self.author}')"
@@ -39,7 +43,6 @@ class User(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean, default=False)
 
     # Relationship to Reviews
-    # Updated the backref name to avoid conflict
     reviews = db.relationship('Reviews', backref='review_user', lazy=True)
 
     def set_password(self, password):
@@ -50,3 +53,12 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"User(id={self.id}, username='{self.username}')"
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    book_id = db.Column(db.Integer, db.ForeignKey('books.id'), nullable=False)
+
+    user = db.relationship('User', backref='comments')

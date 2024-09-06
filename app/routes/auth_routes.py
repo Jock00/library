@@ -1,11 +1,13 @@
 from flask import render_template, redirect, url_for, flash, Blueprint, \
     render_template, request, session
-from app.forms.book_forms import BookForm, RegisterForm, LoginForm, EditBookForm
+from app.forms.book_forms import BookForm, RegisterForm, LoginForm, \
+                                  EditBookForm, CommentForm
 from app import db
-from app.models.books import User, Books
+from app.models.books import User, Books, Comment
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from functools import wraps
+from sqlalchemy import join
 
 auth = Blueprint('auth', __name__)
 
@@ -22,6 +24,7 @@ def add_book():
             image=form.image.data,
             description=form.description.data
         )
+        new_book.user = current_user
         db.session.add(new_book)
         db.session.commit()
         flash('Book added successfully!', 'success')
@@ -162,3 +165,23 @@ def delete_book(book_id):
     db.session.commit()
     flash('Book deleted successfully!', 'success')
     return redirect(url_for('main.view_books'))
+
+@auth.route('/view_book/<int:book_id>', methods=['GET', 'POST'])
+@login_required
+def view_book(book_id):
+    book = Books.query.get_or_404(book_id)
+    form = CommentForm()
+    if form.validate_on_submit():
+        comment = Comment(
+            content=form.content.data,
+            user_id=current_user.id,
+            book_id=book_id
+        )
+        db.session.add(comment)
+        db.session.commit()
+        flash('Comment added successfully!', 'success')
+        return redirect(url_for('auth.view_book', book_id=book_id))
+
+    comments = Comment.query.filter_by(book_id=book_id).all()
+    return render_template('view_book.html', book=book, form=form, comments=comments)
+

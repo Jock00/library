@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block additional_css %}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/view_book.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="book-details">
+    <h2>{{ book.name }}</h2>
+    <p><strong>Author:</strong> {{ book.author }}</p>
+    <img src="{{ book.image }}" alt="{{ book.name }}">
+    <p><strong>Description:</strong> {{ book.description }}</p>
+    <p><strong>Posted by:</strong> {{ book.user.email }}</p>
+</div>
+
+<hr>
+
+<div class="comments-section">
+    <h3>Comments</h3>
+
+    <!-- Display existing comments -->
+    {% for comment in comments %}
+        <div class="comment">
+            <p>{{ comment.content }}</p>
+            <small><strong>{{ comment.user.email }}</strong> on {{ comment.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+        </div>
+        <hr>
+    {% endfor %}
+
+    <!-- Only allow posting if the user is logged in -->
+    {% if current_user.is_authenticated %}
+        <form method="POST"
+              action="{{ url_for('auth.view_book', book_id=book.id) }}">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.content.label }}
+                {{ form.content(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-primary">Post Comment</button>
+        </form>
+    {% else %}
+        <p><a href="{{ url_for('auth.login') }}">Log in</a> to post a comment.</p>
+    {% endif %}
+</div>
+{% endblock %}
